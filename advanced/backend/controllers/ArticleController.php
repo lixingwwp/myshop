@@ -79,4 +79,24 @@ class ArticleController extends Controller{
         \Yii::$app->session->setFlash(['success','文章删除成功']);
         return $this->redirect(['article/index']);
     }
+
+    public function actionDetail($id){
+        $article = Article::findOne(['id'=>$id]);
+        $detail = ArticleDetail::findOne(['article_id'=>$id]);
+        return $this->render('detail',['article'=>$article,'detail'=>$detail]);
+    }
+
+    public function actions()
+    {
+        return [
+
+            'ueditor' => [
+                'class' => 'crazyfd\ueditor\Upload',
+                'config'=>[
+                    'uploadDir'=>date('Y/m/d')
+                ]
+
+            ],
+        ];
+    }
 }

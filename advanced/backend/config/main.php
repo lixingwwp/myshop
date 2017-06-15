@@ -17,10 +17,11 @@ return [
             'csrfParam' => '_csrf-backend',
         ],
         'user' => [
-            'identityClass' => 'common\models\User',
+            'identityClass' => 'backend\models\User',
             'enableAutoLogin' => true,
             'identityCookie' => ['name' => '_identity-backend', 'httpOnly' => true],
         ],
+
         'session' => [
             // this is the name of the session cookie used for login on the backend
             'name' => 'advanced-backend',
@@ -45,6 +46,14 @@ return [
             ],
         ],
         */
+        'niu'=>[
+            'class'=>\backend\components\Qiniu::className(),
+            'up_host'=>'http://up-z2.qiniu.com',
+            'accessKey'=>'OwC1zk6YU4cmtR4hQc5jD77jQRF6iahDwPECS0OU',
+            'secretKey'=>'PiCoiSC961uJ7MHi5lyg0RexDLBEznIVi9nb-zEw',
+            'bucket'=>'leephp',
+            'domain'=>'http://or9rzgn4u.bkt.clouddn.com'
+        ],
     ],
     'params' => $params,
 ];

@@ -22,6 +22,7 @@
             <td>
                 <?=\yii\bootstrap\Html::a('编辑',['article/edit','id'=>$model->id],['class'=>'btn btn-warning btn-xs'])?>
                 <?=\yii\bootstrap\Html::a('删除',['article/del','id'=>$model->id],['class'=>'btn btn-danger btn-xs'])?>
+                <?=\yii\bootstrap\Html::a('详情',['article/detail','id'=>$model->id],['class'=>'btn btn-info btn-xs'])?>
             </td>
 
         </tr>

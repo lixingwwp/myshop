@@ -2,8 +2,8 @@
 namespace backend\controllers;
 use xj\uploadify\UploadAction;
 use app\models\Brand;
-use GuzzleHttp\Psr7\UploadedFile;
 use yii\data\Pagination;
+use crazyfd\qiniu\Qiniu;
 
 class BrandController extends \yii\web\Controller{
 
@@ -97,21 +97,42 @@ class BrandController extends \yii\web\Controller{
                 },
                 //END CLOSURE BY TIME
                 'validateOptions' => [
-                    'extensions' => ['jpg', 'png'],
+                    'extensions' => ['jpg', 'png','gif'],
                     'maxSize' => 1 * 1024 * 1024, //file size
                 ],
                 'beforeValidate' => function (UploadAction $action) {
-                    //throw new Exception('test error');
+                   //throw new Exception('test error');
                 },
                 'afterValidate' => function (UploadAction $action) {},
                 'beforeSave' => function (UploadAction $action) {},
                 'afterSave' => function (UploadAction $action) {
-                    $action->output['fileUrl'] = $action->getWebUrl();
+
                     $action->getFilename(); // "image/yyyymmddtimerand.jpg"
                     $action->getWebUrl(); //  "baseUrl + filename, /upload/image/yyyymmddtimerand.jpg"
                     $action->getSavePath(); // "/var/www/htdocs/upload/image/yyyymmddtimerand.jpg"
+                    $url = $action->getWebUrl();
+                    $qiniu = \Yii::$app->niu;
+                    $qiniu->uploadFile(\Yii::getAlias('@webroot').$url,$url);
+                    $res_url = $qiniu->getLink($url);
+                    $action->output['fileUrl'] =  $res_url;
+
                 },
             ],
         ];
     }
+
+    public function actionTest(){
+        $ak = 'OwC1zk6YU4cmtR4hQc5jD77jQRF6iahDwPECS0OU';
+        $sk = 'PiCoiSC961uJ7MHi5lyg0RexDLBEznIVi9nb-zEw';
+        $domain = 'http://or9rzgn4u.bkt.clouddn.com/';
+        $bucket = 'leephp';
+        $qiniu = new Qiniu($ak, $sk,$domain, $bucket);
+        $fileNmmes = \Yii::getAlias('@webroot').'/upload/uEtY-fycstxp4898764.jpg';
+        $key = 'uEtY-fycstxp4898764.jpg';
+        $qiniu->uploadFile($fileNmmes,$key);
+        $url = $qiniu->getLink($key);
+        var_dump($url);
+    }
+
+
 }

@@ -17,7 +17,7 @@
             <tr>
                 <td><?=$model->id?></td>
                 <td><?=$model->name?></td>
-                <td><?=\yii\bootstrap\Html::img('@web'.$model->logo,['width'=>50])?></td>
+                <td><?=\yii\bootstrap\Html::img($model->logo,['width'=>50])?></td>
                 <td><?=$model->intro?></td>
                 <td><?=$model->sort?></td>
                 <td><?=\app\models\Brand::$status[$model->status]?></td>
@@ -35,6 +35,5 @@
         'pagination'=>$page,
         'nextPageLabel'=>'下一页',
         'prevPageLabel'=>'上一页',
-
     ])?>
 </div>

@@ -29,14 +29,14 @@ EOF
 function(file, data, response) {
     data = JSON.parse(data);
     if (data.error) {
-        console.log(data.msg);
+        alert('上传格式不正确');
     } else {
         console.log(data.fileUrl);
         //将上传成功后的图片地址(data.fileUrl)写入img标签
         $('#img_logo').attr("src",data.fileUrl).show();
         //将上传成功后的图片地址(data.fileUrl)写入logo字段
         $('#brand-logo').val(data.fileUrl);
-        
+        $('#new').attr("src",data.fileUrl);
     }
 }
 EOF
@@ -44,7 +44,7 @@ EOF
     ]
 ]);
 if($model->logo){
-    echo Html::img('@web'.$model->logo,['style'=>'width:100px']);
+    echo Html::img($model->logo,['style'=>'width:100px','id'=>'new']);
 }else{
     echo Html::img('',['style'=>'display:none','id'=>'img_logo','height'=>'50px']);
 }

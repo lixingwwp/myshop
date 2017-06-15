@@ -7,6 +7,7 @@ return [
         ],
 
     ],
-    'language'=>'zh-CN'
+    'language'=>'zh-CN',
+    'timeZone'=>'Asia/Chongqing',
 
 ];
