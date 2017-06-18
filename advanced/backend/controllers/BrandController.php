@@ -1,11 +1,19 @@
 <?php
 namespace backend\controllers;
+use backend\components\RbacFilter;
 use xj\uploadify\UploadAction;
 use app\models\Brand;
 use yii\data\Pagination;
 use crazyfd\qiniu\Qiniu;
 
 class BrandController extends \yii\web\Controller{
+
+    public function behaviors()
+    {
+        return [
+            'rbac' => RbacFilter::className(),
+        ];
+    }
 
     public function actionAdd(){
         $model = new Brand();
@@ -115,7 +123,6 @@ class BrandController extends \yii\web\Controller{
                     $qiniu->uploadFile(\Yii::getAlias('@webroot').$url,$url);
                     $res_url = $qiniu->getLink($url);
                     $action->output['fileUrl'] =  $res_url;
-
                 },
             ],
         ];

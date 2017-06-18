@@ -17,6 +17,7 @@ class AccountController extends Controller{
     public function actionLogin(){
         $model = new UserForm();
         if($model->load(\Yii::$app->request->post())&&$model->validate()){
+//            var_dump($model);exit;
             $id = \Yii::$app->user->id;
             $user = User::findOne(['id'=>$id]);
             $user->login_ip= \Yii::$app->request->userIP;

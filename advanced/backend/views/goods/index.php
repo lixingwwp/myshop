@@ -48,9 +48,14 @@
             <td><?=$good->status?'<span class="glyphicon glyphicon-ok btn btn-success btn-xs"></span>':'<span class="glyphicon glyphicon-remove btn btn-danger btn-xs"></span>'?></td>
             <td><?=date('Y年m月d日 H:i:s',$good->create_time)?></td>
             <td>
-                <?=\yii\bootstrap\Html::a('编辑',['goods/edit','id'=>$good->id],['class'=>'btn btn-warning btn-xs'])?>
-                <?=\yii\bootstrap\Html::a('删除',['goods/del','id'=>$good->id],['class'=>'btn btn-danger btn-xs'])?>
-                <?=\yii\bootstrap\Html::a('图库',['gallery','id'=>$good->id],['class'=>'btn btn-info btn-xs'])?>
+                <?php
+                    echo \yii\bootstrap\Html::a('编辑',['goods/edit','id'=>$good->id],['class'=>'btn btn-warning btn-xs']);
+                    if(Yii::$app->user->can('goods/del')){
+                        echo \yii\bootstrap\Html::a('删除',['goods/del','id'=>$good->id],['class'=>'btn btn-danger btn-xs']);
+                    }
+                    echo  \yii\bootstrap\Html::a('图库',['gallery','id'=>$good->id],['class'=>'btn btn-info btn-xs']);
+                ?>
+
             </td>
         </tr>
     <?php endforeach;?>

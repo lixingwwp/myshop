@@ -20,9 +20,19 @@
             <td><?=\backend\models\Article::$status[$model->status]?></td>
             <td><?=date('Y年m月d日 H:i:s',$model->create_time)?></td>
             <td>
-                <?=\yii\bootstrap\Html::a('编辑',['article/edit','id'=>$model->id],['class'=>'btn btn-warning btn-xs'])?>
-                <?=\yii\bootstrap\Html::a('删除',['article/del','id'=>$model->id],['class'=>'btn btn-danger btn-xs'])?>
-                <?=\yii\bootstrap\Html::a('详情',['article/detail','id'=>$model->id],['class'=>'btn btn-info btn-xs'])?>
+                <?php
+//                    if(Yii::$app->user->can('article/edit')){
+                        echo \yii\bootstrap\Html::a('编辑',['article/edit','id'=>$model->id],['class'=>'btn btn-warning btn-xs']);
+//                    }
+//                    if(Yii::$app->user->can('article/del')){
+//                        echo 'aaa';exit;
+                        echo \yii\bootstrap\Html::a('删除',['article/del','id'=>$model->id],['class'=>'btn btn-danger btn-xs']);
+//                    }
+//                    if(Yii::$app->user->can('article/detail')){
+                        echo \yii\bootstrap\Html::a('详情',['article/detail','id'=>$model->id],['class'=>'btn btn-info btn-xs']);
+//                    }
+
+                ?>
             </td>
 
         </tr>

@@ -2,10 +2,18 @@
 namespace backend\controllers;
 
 use app\models\ArticleCategory;
+use backend\components\RbacFilter;
 use yii\data\Pagination;
 use yii\web\Controller;
 
 class ArticleCategoryController extends Controller{
+    public function behaviors()
+    {
+        return [
+            'rbac' => RbacFilter::className(),
+        ];
+    }
+
     public function actionAdd(){
         $model = new ArticleCategory();
         $result = \Yii::$app->request;

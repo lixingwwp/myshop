@@ -23,7 +23,13 @@
                 <td><?=\app\models\Brand::$status[$model->status]?></td>
                 <td>
                     <?=\yii\bootstrap\Html::a('编辑',['brand/edit','id'=>$model->id],['class'=>'btn btn-warning btn-xs'])?>
-                    <?=\yii\bootstrap\Html::a('删除',['brand/del','id'=>$model->id],['class'=>'btn btn-danger btn-xs'])?>
+
+
+                    <?php
+                    if(Yii::$app->user->can('brand/del')){
+                        echo \yii\bootstrap\Html::a('删除',['brand/del','id'=>$model->id],['class'=>'btn btn-danger btn-xs']);
+                    }
+                    ?>
                 </td>
             </tr>
         <?php endforeach;?>

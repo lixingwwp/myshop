@@ -19,7 +19,12 @@
         <td><?=\app\models\ArticleCategory::$is_help[$model->is_help]?></td>
         <td>
             <?=\yii\bootstrap\Html::a('编辑',['article-category/edit','id'=>$model->id],['class'=>'btn btn-warning btn-xs'])?>
-            <?=\yii\bootstrap\Html::a('删除',['article-category/del','id'=>$model->id],['class'=>'btn btn-danger btn-xs'])?>
+           <?php
+            if(Yii::$app->user->can('article-category/del')){
+                echo \yii\bootstrap\Html::a('删除',['article-category/del','id'=>$model->id],['class'=>'btn btn-danger btn-xs']);
+            }
+           ?>
+
         </td>
     </tr>
     <?php endforeach;?>

@@ -18,7 +18,13 @@
             <td><?=$category->intro?></td>
             <td>
                 <?=\yii\bootstrap\Html::a('修改',['goods-category/edit','id'=>$category->id],['class'=>'btn btn-warning btn-xs'])?>
-                <?=\yii\bootstrap\Html::a('删除',['goods-category/del','id'=>$category->id],['class'=>'btn btn-danger btn-xs'])?>
+
+
+                <?php
+                if(Yii::$app->user->can('goods-category/del')){
+                    echo  \yii\bootstrap\Html::a('删除',['goods-category/del','id'=>$category->id],['class'=>'btn btn-danger btn-xs']);
+                }
+                ?>
             </td>
         </tr>
 

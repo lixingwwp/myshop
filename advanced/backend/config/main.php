@@ -20,6 +20,7 @@ return [
             'identityClass' => 'backend\models\User',
             'enableAutoLogin' => true,
             'identityCookie' => ['name' => '_identity-backend', 'httpOnly' => true],
+            'loginUrl' => ['account/login']
         ],
 
         'session' => [

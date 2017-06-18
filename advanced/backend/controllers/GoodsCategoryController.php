@@ -1,5 +1,6 @@
 <?php
 namespace backend\controllers;
+use backend\components\RbacFilter;
 use backend\models\GoodsCategory;
 use Symfony\Component\Yaml\Yaml;
 use yii\web\Controller;
@@ -11,6 +12,13 @@ use yii\web\Controller;
  * Time: 14:31
  */
 class GoodsCategoryController extends Controller{
+
+    public function behaviors()
+    {
+        return [
+            'rbac' => RbacFilter::className(),
+        ];
+    }
 
     public function actionAdd(){
         $options = GoodsCategory::find()->asArray()->all();

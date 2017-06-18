@@ -1,5 +1,6 @@
 <?php
 namespace backend\controllers;
+use backend\components\RbacFilter;
 use backend\models\GoodsCategory;
 use backend\models\GoodsDayCount;
 use backend\models\GoodsIntro;
@@ -16,6 +17,13 @@ use yii\web\NotFoundHttpException;
 use yii\web\UploadedFile;
 
 class GoodsController extends Controller{
+
+    public function behaviors()
+    {
+        return [
+            'rbac' => RbacFilter::className(),
+        ];
+    }
     //添加商品
     public function actionAdd(){
         $model = new Goods();

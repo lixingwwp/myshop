@@ -10,8 +10,13 @@ class UserController extends Controller{
         $model = new User();
         if($model->load(\Yii::$app->request->post())&&$model->validate()){
             $model->password_hash = \Yii::$app->security->generatePasswordHash($model->password);
-            $model->save(false);
-            \Yii::$app->session->setFlash('success','添加用户成功');
+                $model->save(false);
+                $id = \Yii::$app->db->getLastInsertID();
+                if($model->addUser($id)){
+                    \Yii::$app->session->setFlash('success','添加用户成功');
+                }else{
+                    \Yii::$app->session->setFlash('danger','添加用户失败');
+                }
             return $this->redirect(['user/index']);
         }
         return $this->render('add',['model'=>$model]);
@@ -45,9 +50,11 @@ class UserController extends Controller{
 
     public function actionEdit($id){
         $model =User::findOne(['id'=>$id]);
-        if($model->load(\Yii::$app->request->post())&&$model->validate()){
+        $model->getOptions($id);
+        if($model->load(\Yii::$app->request->post())&&$model->validate()&&$model->addUser($id)){
             $model->password_hash = \Yii::$app->security->generatePasswordHash($model->password);
             $model->save(false);
+
             \Yii::$app->session->setFlash('success','修改用户成功');
             return $this->redirect(['user/index']);
         }

@@ -12,6 +12,7 @@ class UserForm extends Model{
     public function rules()
     {
         return [
+            ['remember','boolean'],
             [['username','password','code'],'required'],
             ['code','captcha','captchaAction'=>'account/captcha'],
             ['username','validateUsername']
@@ -33,8 +34,8 @@ class UserForm extends Model{
         $account = User::findOne(['username'=>$this->username]);
         if($account){
             if(\Yii::$app->security->validatePassword($this->password,$account->password_hash)){
-                $time = 3600;
-                \Yii::$app->user->login($account,$time = 3600);
+                $identity = $this->remember?3600:0;
+                \Yii::$app->user->login($account,$identity);
 
             }else{
                 $this->addError('password','账号或密码错误');

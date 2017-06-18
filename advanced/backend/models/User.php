@@ -3,6 +3,7 @@
 namespace backend\models;
 
 use Yii;
+use yii\helpers\ArrayHelper;
 use yii\web\IdentityInterface;
 
 /**
@@ -25,7 +26,55 @@ class User extends \yii\db\ActiveRecord implements IdentityInterface
      */
     public $password;
     public $code;
+    public $roles=[];
 
+    //获得全部角色,分配到视图的多选按钮,供用户选择
+    static public function role(){
+        $authManager = Yii::$app->authManager;
+        $roles = $authManager->getRoles();
+        return ArrayHelper::map($roles,'name','description');
+    }
+
+    //获得修改传过来的id的数据(作为回显);
+    public function getOptions($id){
+        $authManager = Yii::$app->authManager;
+        $roles = $authManager->getRolesByUser($id);
+        foreach($roles as $roleOne){
+            if($roleOne){
+                $roles[]=$roleOne->description;
+            }
+        }
+        $this->roles = $roles;
+    }
+
+    //修改分配角色
+    public function editRole($id){
+        $authManager = Yii::$app->authManager;
+        //删除当前对象原来的角色
+        $authManager->revokeAll($id);
+        //添加新角色
+        foreach($this->roles as $roleOne){
+//            if($roleOne){
+                $role = $authManager->getRole($roleOne);
+                $authManager->assign($id,$role);
+//            }
+        }
+        return true;
+
+    }
+
+    public function addUser($id){
+        $authManager = Yii::$app->authManager;
+        if($this->roles){
+            $authManager->revokeAll($id);
+            foreach ($this->roles as $roleName){
+                $role = $authManager->getRole($roleName);
+                if($role) $authManager->assign($role,$id);
+            }
+            return true;
+        }
+        return false;
+    }
     public static function tableName()
     {
         return 'user';
@@ -37,7 +86,7 @@ class User extends \yii\db\ActiveRecord implements IdentityInterface
     public function rules()
     {
         return [
-            [['username', 'email','password'], 'required'],
+            [['username', 'email','password','roles'], 'required'],
             [['status', 'created_at', 'updated_at'], 'integer'],
             [['username', 'password_hash', 'password_reset_token', 'email'], 'string', 'max' => 255],
             [['username'], 'unique'],
@@ -64,13 +113,17 @@ class User extends \yii\db\ActiveRecord implements IdentityInterface
             'created_at' => 'Created At',
             'updated_at' => 'Updated At',
             'password'=>'密码',
-            'code'=>'验证码'
+            'code'=>'验证码',
+            'roles'=>'角色'
         ];
     }
     public function beforeSave($insert)
     {
         if($insert){
             $this->created_at = time();
+//            var_dump(Yii::$app->security->generateRandomString());
+            $this->auth_key = Yii::$app->security->generateRandomString();
+
         }else{
             $this->updated_at = time();
         }
@@ -126,7 +179,7 @@ class User extends \yii\db\ActiveRecord implements IdentityInterface
      */
     public function getAuthKey()
     {
-        // TODO: Implement getAuthKey() method.
+       return $this->auth_key;
     }
 
     /**
@@ -139,6 +192,6 @@ class User extends \yii\db\ActiveRecord implements IdentityInterface
      */
     public function validateAuthKey($authKey)
     {
-        // TODO: Implement validateAuthKey() method.
+        return $this->getAuthKey() == $authKey;
     }
 }

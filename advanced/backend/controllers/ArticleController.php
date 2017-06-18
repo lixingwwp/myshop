@@ -2,12 +2,20 @@
 namespace backend\controllers;
 
 use app\models\ArticleCategory;
+use backend\components\RbacFilter;
 use backend\models\Article;
 use backend\models\ArticleDetail;
 use yii\data\Pagination;
 use yii\web\Controller;
 
 class ArticleController extends Controller{
+
+    public function behaviors()
+    {
+        return [
+            'rbac' => RbacFilter::className(),
+        ];
+    }
 
     public function actionAdd(){
         //实例化文章对象
