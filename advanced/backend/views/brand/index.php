@@ -17,7 +17,7 @@
             <tr>
                 <td><?=$model->id?></td>
                 <td><?=$model->name?></td>
-                <td><?=\yii\bootstrap\Html::img($model->logo,['width'=>50])?></td>
+                <td><?=\yii\bootstrap\Html::img($model->logo,['width'=>80])?></td>
                 <td><?=$model->intro?></td>
                 <td><?=$model->sort?></td>
                 <td><?=\app\models\Brand::$status[$model->status]?></td>

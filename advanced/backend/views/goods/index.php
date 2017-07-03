@@ -54,6 +54,7 @@
                         echo \yii\bootstrap\Html::a('删除',['goods/del','id'=>$good->id],['class'=>'btn btn-danger btn-xs']);
                     }
                     echo  \yii\bootstrap\Html::a('图库',['gallery','id'=>$good->id],['class'=>'btn btn-info btn-xs']);
+
                 ?>
 
             </td>

@@ -22,6 +22,7 @@ class RbacController extends Controller{
     }
 
     public function actionPermissionIndex(){
+        //获得全部权限
         $models = \Yii::$app->authManager->getPermissions();
         return $this->render('permission-index',['models'=>$models]);
 
@@ -89,7 +90,6 @@ class RbacController extends Controller{
             }
             return $this->redirect(['role-index']);
         }
-
         return $this->render('add-role',['model'=>$model]);
     }
     public function actionRoleDel($name){
@@ -104,7 +104,6 @@ class RbacController extends Controller{
             }
             return $this->redirect(['role-index']);
         }
-
     }
 
 }

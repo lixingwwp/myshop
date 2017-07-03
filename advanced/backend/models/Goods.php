@@ -3,7 +3,9 @@
 namespace backend\models;
 
 use app\models\Brand;
+use backend\controllers\BrandController;
 use Yii;
+use yii\helpers\ArrayHelper;
 
 /**
  * This is the model class for table "goods".
@@ -30,11 +32,28 @@ class Goods extends \yii\db\ActiveRecord
     /**
      * @inheritdoc
      */
+
+    public function makeSn($now){
+        //在goods_day_count表中查找是否有这条记录
+        $list = GoodsDayCount::findOne(['day'=>$now]);
+        $counts = new GoodsDayCount();
+        if(!$list){
+            $counts->day=$now;
+            $counts->count++;
+            $counts->save();
+        }else{
+            $list->count++;
+            $list->save();
+        }
+    }
     public static function tableName()
     {
         return 'goods';
     }
 
+    public static function getBrandOptions(){
+        return ArrayHelper::map(Brand::find()->asArray()->all(),'id','name');
+    }
     /**
      * @inheritdoc
      */
@@ -76,8 +95,15 @@ class Goods extends \yii\db\ActiveRecord
         return $this->hasOne(GoodsCategory::className(),['id'=>'goods_category_id']);
     }
 
-    public function getBrand(){
+   public function getBrand(){
         return $this->hasOne(Brand::className(),['id'=>'brand_id']);
+   }
+    public function getGalleries()
+    {
+        return $this->hasMany(GoodsGallery::className(),['goods_id'=>'id']);
+    }
+    public function getDetail(){
+        return $this->hasOne(GoodsIntro::className(),['goods_id'=>'id']);
     }
 
     public function beforeSave($insert)

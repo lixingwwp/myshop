@@ -11,7 +11,11 @@ class BrandController extends \yii\web\Controller{
     public function behaviors()
     {
         return [
-            'rbac' => RbacFilter::className(),
+            'rbac' =>[
+                'class' => RbacFilter::className(),
+                'only'=>['index','edit','del','add'],
+            ],
+
         ];
     }
 
@@ -41,7 +45,7 @@ class BrandController extends \yii\web\Controller{
         $total = $query->count();
         $page = new Pagination([
             'totalCount'=>$total,
-            'pageSize'=>2,
+            'pageSize'=>5,
         ]);
         $models = $query->offset($page->offset)->limit($page->limit)->all();
         return $this->render('index',['models'=>$models,'page'=>$page]);
@@ -118,6 +122,8 @@ class BrandController extends \yii\web\Controller{
                     $action->getFilename(); // "image/yyyymmddtimerand.jpg"
                     $action->getWebUrl(); //  "baseUrl + filename, /upload/image/yyyymmddtimerand.jpg"
                     $action->getSavePath(); // "/var/www/htdocs/upload/image/yyyymmddtimerand.jpg"
+
+                //上传至七牛云
                     $url = $action->getWebUrl();
                     $qiniu = \Yii::$app->niu;
                     $qiniu->uploadFile(\Yii::getAlias('@webroot').$url,$url);
@@ -127,6 +133,8 @@ class BrandController extends \yii\web\Controller{
             ],
         ];
     }
+
+
 
     public function actionTest(){
         $ak = 'OwC1zk6YU4cmtR4hQc5jD77jQRF6iahDwPECS0OU';

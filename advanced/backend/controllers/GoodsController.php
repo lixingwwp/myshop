@@ -3,6 +3,7 @@ namespace backend\controllers;
 use backend\components\RbacFilter;
 use backend\models\GoodsCategory;
 use backend\models\GoodsDayCount;
+use backend\models\GoodsGallery;
 use backend\models\GoodsIntro;
 use backend\models\GoodsPhotos;
 use backend\models\GoodsSearchForm;
@@ -18,39 +19,31 @@ use yii\web\UploadedFile;
 
 class GoodsController extends Controller{
 
-    public function behaviors()
-    {
-        return [
-            'rbac' => RbacFilter::className(),
-        ];
-    }
+//    public function behaviors()
+//    {
+//        return [
+//            'rbac' =>[
+//                'class'=>RbacFilter::className(),
+//                'only'=>['add','index','edit','del','gallery']
+//            ]
+//        ];
+//    }
     //添加商品
     public function actionAdd(){
         $model = new Goods();
         $brands = Brand::find()->asArray()->all();
         $goodsCategorys = GoodsCategory::find()->asArray()->all();
-        $goodsCategorys[]=['id'=>0,'name'=>'顶级分类','parent_id'=>0];
+        $goodsCategorys[]=['id'=>0,'name'=>'--顶级分类--','parent_id'=>0];
         $goodsIntro = new GoodsIntro();
         $goodsPhotos = new GoodsPhotos();
         if($model->load(\Yii::$app->request->post())&&$goodsIntro->load(\Yii::$app->request->post())&&$model->validate()){
             //添加sn编号
             //获取当前日期
             $now = date('Ymd',time());
-//            var_dump($now);exit;
-            //在goods_day_count表中查找是否有这条记录
-            $list = GoodsDayCount::findOne(['day'=>$now]);
-            $counts = new GoodsDayCount();
-            if(!$list){
-               $counts->day=$now;
-               $counts->count++;
-               $counts->save();
-            }else{
-                $list->count++;
-                $list->save();
-            }
-            $model->sn = $now.str_pad($list->count,5,'0',STR_PAD_LEFT);
+            $model->makeSn($now);
+            $count = GoodsDayCount::findOne(['day'=>$now]);
+            $model->sn = $now.str_pad($count->count ,5,'0',STR_PAD_LEFT);
             $model->save();
-            var_dump($goodsPhotos->photo);
             $last_id = \Yii::$app->db->getLastInsertID();
 
             $goodsIntro->goods_id = $last_id;
@@ -61,7 +54,7 @@ class GoodsController extends Controller{
             var_dump($model->getErrors());
         }
 
-        return $this->render('add',['model'=>$model,'brands'=>$brands,'goodsCategorys'=>$goodsCategorys,'goodsIntro'=>$goodsIntro,'goodsPhotos'=>$goodsPhotos]);
+        return $this->render('add',['model'=>$model,'brands'=>$brands,'goodsCategorys'=>$goodsCategorys,'goodsIntro'=>$goodsIntro,]);
     }
 
     public function actions() {
@@ -109,10 +102,12 @@ class GoodsController extends Controller{
                 'afterValidate' => function (UploadAction $action) {},
                 'beforeSave' => function (UploadAction $action) {},
                 'afterSave' => function (UploadAction $action) {
-                    $action->output['fileUrl'] = $action->getWebUrl();
-                    $action->getFilename(); // "image/yyyymmddtimerand.jpg"
-                    $action->getWebUrl(); //  "baseUrl + filename, /upload/image/yyyymmddtimerand.jpg"
-                    $action->getSavePath(); // "/var/www/htdocs/upload/image/yyyymmddtimerand.jpg"
+                    $model = new GoodsGallery();
+                    $model->goods_id = \Yii::$app->request->post('goods_id');
+                    $model->path = $action->getWebUrl();
+                    $model->save();
+                    $action->output['fileUrl'] = $model->path;
+                    $action->output['id'] = $model->id;
                 },
             ],
         ];
@@ -140,21 +135,14 @@ class GoodsController extends Controller{
         $goodsIntro = GoodsIntro::findOne(['goods_id'=>$id]);
         $brands = Brand::find()->asArray()->all();
         $goodsCategorys = GoodsCategory::find()->asArray()->all();
-        $goodsCategorys[]=['id'=>0,'name'=>'顶级分类','parent_id'=>0];
-        $goodsPhotos = new GoodsPhotos();
-
+        $goodsCategorys[]=['id'=>0,'name'=>'--顶级分类--','parent_id'=>0];
+        //$goodsPhotos = new GoodsPhotos();
         if($model->load(\Yii::$app->request->post())&&$goodsIntro->load(\Yii::$app->request->post())&&$model->validate()){
-            //添加sn编号
-            //获取当前日期
-            $now = date('Ymd',time());
-//            var_dump($now);exit;
-            //在goods_day_count表中查找是否有这条记录
-
             $model->save();
 
             $last_id = \Yii::$app->db->getLastInsertID();
 
-            $goodsIntro->goods_id = $last_id;
+
             $goodsIntro->save();
             \Yii::$app->session->setFlash('success','商品修改成功');
             return $this->redirect(['goods/index']);
@@ -162,7 +150,7 @@ class GoodsController extends Controller{
             var_dump($model->getErrors());
         }
 
-        return $this->render('add',['model'=>$model,'brands'=>$brands,'goodsCategorys'=>$goodsCategorys,'goodsIntro'=>$goodsIntro,'goodsPhotos'=>$goodsPhotos]);
+        return $this->render('add',['model'=>$model,'brands'=>$brands,'goodsCategorys'=>$goodsCategorys,'goodsIntro'=>$goodsIntro,]);
     }
 
     public function actionDel($id){
@@ -183,11 +171,27 @@ class GoodsController extends Controller{
         return $this->render('test',['goodsPhotos'=>$goodsPhotos]);
     }
 
-    public function actionGallery($id){
+
+    public function actionGallery($id)
+    {
         $goods = Goods::findOne(['id'=>$id]);
-        if($goods==null){
+        if($goods == null){
             throw new NotFoundHttpException('商品不存在');
         }
         return $this->render('gallery',['goods'=>$goods]);
+    }
+
+    /*
+     * AJAX删除图片
+     */
+    public function actionDelGallery(){
+        $id = \Yii::$app->request->post('id');
+        $model = GoodsGallery::findOne(['id'=>$id]);
+        if($model && $model->delete()){
+            return 'success';
+        }else{
+            return 'fail';
+        }
+
     }
 }

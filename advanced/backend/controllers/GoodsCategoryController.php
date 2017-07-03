@@ -16,7 +16,10 @@ class GoodsCategoryController extends Controller{
     public function behaviors()
     {
         return [
-            'rbac' => RbacFilter::className(),
+            'rbac' =>[
+                'class'=>RbacFilter::className(),
+                'only'=>['add','index','edit','del']
+            ]
         ];
     }
 
@@ -56,7 +59,7 @@ class GoodsCategoryController extends Controller{
             \Yii::$app->session->setFlash('success','分类添加成功');
             return $this->redirect(['goods-category/index']);
         }else{
-            var_dump($model->getErrors());
+
         }
 
         return $this->render('add',['model'=>$model,'options'=>$options]);

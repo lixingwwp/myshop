@@ -19,10 +19,12 @@ class RoleForm extends Model{
     }
 
     public function getOptions(Role $role){
+        //获得原来的角色名
         $this->name = $role->name;
+        //获得原来的描述
         $this->description = $role->description;
         $authManager = \Yii::$app->authManager;
-
+        //通过实例化对象,通过name查找原来的权限
         foreach ($authManager->getPermissionsByRole($role->name) as $permission){
             $this->permissions[]=$permission->name;
         }
@@ -63,7 +65,6 @@ class RoleForm extends Model{
             }
         }
         return false;
-
     }
 
     public function editRole($name){

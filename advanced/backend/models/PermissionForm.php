@@ -43,7 +43,6 @@ class PermissionForm extends Model{
         $this->name = $permission->name;
         $this->description = $permission->description;
     }
-
     public function update($name){
         $authManager = \Yii::$app->authManager;
         $permission = $authManager->getPermission($name);

@@ -23,12 +23,12 @@ class Article extends \yii\db\ActiveRecord
      */
     static public $status=['-1'=>'删除','0'=>'隐藏','1'=>'正常'];
 
-    public function getArticleDetail(){
-        return $this->hasMany(ArticleDetail::className(),['article_id'=>'id']);
+    public function getDetail(){
+        return $this->hasOne(ArticleDetail::className(),['article_id'=>'id']);
     }
 
     public function getArticleCategory(){
-        return $this->hasOne(ArticleCategory::className(),['id'=>'article_category_id']);
+       return $this->hasOne(\frontend\models\ArticleCategory::className(),['id'=>'article_category_id']);
     }
     public static function tableName()
     {

@@ -39,14 +39,14 @@ return [
         'errorHandler' => [
             'errorAction' => 'site/error',
         ],
-        /*
+
         'urlManager' => [
             'enablePrettyUrl' => true,
             'showScriptName' => false,
             'rules' => [
             ],
         ],
-        */
+
         'niu'=>[
             'class'=>\backend\components\Qiniu::className(),
             'up_host'=>'http://up-z2.qiniu.com',

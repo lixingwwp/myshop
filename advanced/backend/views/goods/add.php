@@ -101,16 +101,7 @@ EOF
             echo $form->field($model,'is_on_sale')->radioList(\backend\models\Goods::$is_on_sale);
             echo $form->field($model,'status')->radioList(\backend\models\Goods::$status);
             echo $form->field($goodsIntro, 'content')->widget(\crazyfd\ueditor\Ueditor::className(),[]);
-            echo $form->field($goodsPhotos, 'photo[]')->widget(\kartik\file\FileInput::classname(), [
-                'options' => ['multiple' => true],
-//                'pluginOptions' => [
-//                    'uploadExtraData' => [
-//                        'goods_id' => $model->id,
-//                    'uploadUrl' => \yii\helpers\Url::toRoute('@web/goods/photo/async-image')
-//                    ],
-//                ]
 
-            ]);
             echo \yii\bootstrap\Html::submitButton('确认',['class'=>'btn btn-info']);
 
             \yii\bootstrap\ActiveForm::end();
