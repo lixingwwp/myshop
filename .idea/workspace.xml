@@ -1,49 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="9829671d-2787-4a83-bfb3-06cd0434d8e6" name="默认的" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/advanced/backend/controllers/OrderController.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/advanced/backend/views/order/index.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/advanced/backend/web/Order/index.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/advanced/frontend/assets/CartAsset.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/advanced/frontend/assets/GoodsAsset.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/advanced/frontend/assets/ListAsset.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/advanced/frontend/components/Sms.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/advanced/frontend/components/SphinxClient.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/advanced/frontend/controllers/ApiController.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/advanced/frontend/controllers/OrderController.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/advanced/frontend/controllers/ShopController.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/advanced/frontend/models/ArticleCategory.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/advanced/frontend/views/layouts/cart.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/advanced/frontend/views/layouts/list.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/advanced/frontend/views/member/reguest.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/advanced/frontend/views/order/order.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/advanced/frontend/views/shop/cart.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/advanced/frontend/views/shop/demo.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/advanced/frontend/views/shop/goods.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/advanced/frontend/views/shop/list.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/advanced/frontend/widgets/SearchWidget.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/yii_shop_backend.iml" afterPath="$PROJECT_DIR$/.idea/yii_shop_backend.iml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/advanced/backend/config/main.php" afterPath="$PROJECT_DIR$/advanced/backend/config/main.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/advanced/backend/controllers/BrandController.php" afterPath="$PROJECT_DIR$/advanced/backend/controllers/BrandController.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/advanced/backend/controllers/GoodsCategoryController.php" afterPath="$PROJECT_DIR$/advanced/backend/controllers/GoodsCategoryController.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/advanced/backend/controllers/GoodsController.php" afterPath="$PROJECT_DIR$/advanced/backend/controllers/GoodsController.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/advanced/backend/controllers/RbacController.php" afterPath="$PROJECT_DIR$/advanced/backend/controllers/RbacController.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/advanced/backend/models/Article.php" afterPath="$PROJECT_DIR$/advanced/backend/models/Article.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/advanced/backend/models/Goods.php" afterPath="$PROJECT_DIR$/advanced/backend/models/Goods.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/advanced/backend/models/GoodsCategory.php" afterPath="$PROJECT_DIR$/advanced/backend/models/GoodsCategory.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/advanced/backend/models/PermissionForm.php" afterPath="$PROJECT_DIR$/advanced/backend/models/PermissionForm.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/advanced/backend/models/RoleForm.php" afterPath="$PROJECT_DIR$/advanced/backend/models/RoleForm.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/advanced/backend/views/brand/index.php" afterPath="$PROJECT_DIR$/advanced/backend/views/brand/index.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/advanced/backend/views/goods/add.php" afterPath="$PROJECT_DIR$/advanced/backend/views/goods/add.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/advanced/backend/views/goods/gallery.php" afterPath="$PROJECT_DIR$/advanced/backend/views/goods/gallery.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/advanced/backend/views/goods/index.php" afterPath="$PROJECT_DIR$/advanced/backend/views/goods/index.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/advanced/composer.json" afterPath="$PROJECT_DIR$/advanced/composer.json" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/advanced/composer.lock" afterPath="$PROJECT_DIR$/advanced/composer.lock" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/advanced/frontend/config/main.php" afterPath="$PROJECT_DIR$/advanced/frontend/config/main.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/advanced/frontend/controllers/SiteController.php" afterPath="$PROJECT_DIR$/advanced/frontend/controllers/SiteController.php" />
-    </list>
+    <list default="true" id="9829671d-2787-4a83-bfb3-06cd0434d8e6" name="默认的" comment="" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -82,8 +40,8 @@
       <file leaf-file-name="ApiController.php" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/advanced/frontend/controllers/ApiController.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="13443">
-              <caret line="647" column="0" lean-forward="true" selection-start-line="647" selection-start-column="0" selection-end-line="647" selection-end-column="0" />
+            <state relative-caret-position="268">
+              <caret line="120" column="53" lean-forward="true" selection-start-line="120" selection-start-column="53" selection-end-line="120" selection-end-column="53" />
               <folding>
                 <element signature="e#39#70#0#PHP" expanded="true" />
               </folding>
@@ -274,8 +232,8 @@
   </component>
   <component name="PhpWorkspaceProjectConfiguration" backward_compatibility_performed="true" />
   <component name="ProjectFrameBounds">
-    <option name="x" value="89" />
-    <option name="y" value="20" />
+    <option name="x" value="572" />
+    <option name="y" value="75" />
     <option name="width" value="1727" />
     <option name="height" value="1015" />
   </component>
@@ -584,12 +542,12 @@
       <workItem from="1498782823534" duration="24782000" />
       <workItem from="1498874746289" duration="23136000" />
       <workItem from="1498980056581" duration="28740000" />
-      <workItem from="1499043400306" duration="784000" />
+      <workItem from="1499043400306" duration="1982000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="428112000" />
+    <option name="totallyTimeSpent" value="429310000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -602,7 +560,7 @@
     </todo-panel>
   </component>
   <component name="ToolWindowManager">
-    <frame x="89" y="20" width="1727" height="1015" extended-state="1" />
+    <frame x="572" y="75" width="1727" height="1015" extended-state="0" />
     <editor active="true" />
     <layout>
       <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.24055189" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
@@ -1023,8 +981,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/advanced/frontend/controllers/ApiController.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="13443">
-          <caret line="647" column="0" lean-forward="true" selection-start-line="647" selection-start-column="0" selection-end-line="647" selection-end-column="0" />
+        <state relative-caret-position="268">
+          <caret line="120" column="53" lean-forward="true" selection-start-line="120" selection-start-column="53" selection-end-line="120" selection-end-column="53" />
           <folding>
             <element signature="e#39#70#0#PHP" expanded="true" />
           </folding>
